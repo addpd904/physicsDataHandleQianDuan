@@ -1,26 +1,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-
+import zhangLiXiShu from '../views/zhangLiXiShu.vue'
+import focalDistance from '../views/focalDistance.vue'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'zhangLiXiShu',
+    component: zhangLiXiShu
   },
   {
-    path: '/about',
-    name: 'about',
+    path: '/focalDistance',
+    name: 'focalDistance',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: focalDistance
   }
 ]
 
 const router = new VueRouter({
+  base:"/two",
   routes
 })
 
