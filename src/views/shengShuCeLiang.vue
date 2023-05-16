@@ -189,7 +189,7 @@ export default {
             let sendMsg=encodeURI(JSON.stringify(this.tchndata))
             sendMsg+=encodeURI(JSON.stringify(this.gzgsfdata))
             sendMsg+=encodeURI(JSON.stringify(this.xwbjfdata))
-            axios.post("http://localhost:80/submitShengSuCeLiang",sendMsg)
+            axios.post("http://124.71.157.88:80/submitShengSuCeLiang",sendMsg)
             console.log(sendMsg)
         },
         init(){
@@ -385,8 +385,8 @@ table td{
     border: 1px solid;
     height: 30px;
 }
-table{
-    width: 60%;
+div table{
+    width: 800px;
     border-collapse: collapse;
 }
 .tchn td{
@@ -410,4 +410,11 @@ li.spec{
 .tchn .warn{
     font-size: 20px;
 }
+button{
+  font-size: 22px;
+}
+input{
+    background: rgb(237, 240, 239);
+}
+
 </style>

@@ -27,7 +27,7 @@
             </label>
         </div>
         <div>
-            <el-button class="calculate_K_R" type="success" plain>计算</el-button>
+            <el-button class="calculate_K_R" type="success" >计算</el-button>
         </div>
         <div><label>
             -----------------------------
@@ -113,7 +113,7 @@
         </label>
 <!--        button-->
         <div>
-            <el-button class="calculate" type="success" plain>计算</el-button>
+            <el-button class="calculate" type="success" >计算</el-button>
         </div>
 
     </div>
@@ -173,7 +173,7 @@
         </label>
         <!--        button-->
         <div>
-            <el-button class="calculate" type="success" plain>计算</el-button>
+            <el-button class="calculate" type="success" >计算</el-button>
         </div>
 
     </div>
@@ -277,7 +277,7 @@ export default ({
             sendMsg+=encodeURI(JSON.stringify(vueAddress.alcohol))
             sendMsg+=encodeURI(JSON.stringify(vueAddress.D1D2))
             sendMsg+=encodeURI(JSON.stringify(vueAddress.arr1))
-            axios.post("http://localhost:80/submitZhangLiXiShu",sendMsg)
+            axios.post("http://124.71.157.88:80/submitZhangLiXiShu",sendMsg)
         },
         cal(){
 
@@ -327,7 +327,7 @@ export default ({
                 let r=sum_xi_x_yi_y/Math.sqrt(sum_xi_x_2*sum_yi_y_2);
             //    modify the label
                 let labels=document.querySelectorAll('.sensor .result label')
-                labels[0].innerHTML='K='+K.toFixed(6)+' mv/N';
+                labels[0].innerHTML='K='+K.toFixed(3)+' mv/N';
                 // labels[1].innerText=
                 labels[2].innerHTML='R='+r.toFixed(6);
 // draw chart
@@ -365,18 +365,18 @@ export default ({
                     //calculate delta_U
                     let delta_U=value1-value2
                     //assign the value to table
-                    tds[3].innerText=delta_U.toFixed(6)
+                    tds[3].innerText=delta_U.toFixed(3)
                 //    calculate the F
                     let F=delta_U/K
-                    tds[4].innerText=F.toFixed(6)
+                    tds[4].innerText=F.toFixed(3)
                     let a=F/(3.1415926*(D1+D2))*100
-                    tds[5].innerText=a.toFixed(6)
+                    tds[5].innerText=a.toFixed(3)
                     sum+=a
                 }
             //    calculate the mean of a
                 let mean_a=sum/(vueAddress.water.length);
                 let result=document.querySelector('.water .a')
-                result.innerHTML='a='+mean_a.toFixed(6)
+                result.innerHTML='a='+mean_a.toFixed(3)
                 if(flage1==1&&flage2==1&&flage3==1){
                     vueAddress.submitData()
                 }
@@ -401,19 +401,19 @@ export default ({
                     //calculate delta_U
                     let delta_U=value1-value2
                     //assign the value to table
-                    tds[3].innerText=delta_U.toFixed(6)
+                    tds[3].innerText=delta_U.toFixed(3)
                     //    calculate the F
                     let F=delta_U/K
-                    tds[4].innerText=F.toFixed(6)
+                    tds[4].innerText=F.toFixed(3)
                     let a=F/(3.1415926*(D1+D2))*100
-                    tds[5].innerText=a.toFixed(6)
+                    tds[5].innerText=a.toFixed(3)
                     sum+=a
                     console.log("testjiujing")
                 }
             //    calculate the mean of a
                 let mean_a=sum/(vueAddress.alcohol.length);
                 let result=document.querySelector('.JiuJin .a')
-                result.innerHTML='a='+mean_a.toFixed(6)
+                result.innerHTML='a='+mean_a.toFixed(3)
                 if(flage1==1&&flage2==1&&flage3==1){
                     vueAddress.submitData()
                 }
@@ -464,8 +464,8 @@ div label{
     width: 200px;
     font-size: 20px;
 }
-div .table{
-    width: 60%;
+div table{
+    width: 800px;
 }
 
 div .calculate,.calculate_K_R{
@@ -480,6 +480,16 @@ div input{
 /* water */
 .center{
     margin: auto;
+}
+button{
+  font-size: 22px;
+}
+input{
+    background: rgb(237, 240, 239);
+}
+div td{
+    border: 1px solid;
+    height: 30px;
 }
 </style>
 

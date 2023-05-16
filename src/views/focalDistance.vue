@@ -42,7 +42,7 @@
         </ul>
         <!--        button-->
         <div>
-            <el-button class="ziZhunFa_btn_cal" type="danger" plain>计算</el-button>
+            <el-button class="ziZhunFa_btn_cal" type="success" >计算</el-button>
         </div>
     
     </div>
@@ -107,7 +107,7 @@
         </ul>
         <!--        button-->
         <div>
-            <el-button class="gongErFa_btn_cal" type="danger" plain>计算</el-button>
+            <el-button class="gongErFa_btn_cal" type="success" >计算</el-button>
         </div>
 
     </div>
@@ -176,7 +176,7 @@
 
         <!--        button-->
         <div>
-            <el-button class="wuXiangGongSiFa_btn_cal" type="danger" plain>计算</el-button>
+            <el-button class="wuXiangGongSiFa_btn_cal" type="success" >计算</el-button>
         </div>
 
     </div>
@@ -194,7 +194,7 @@ let flage2=0
 let flage3=0
 //add func for calculate_K_R button
 export default ({
-        data() {
+    data() {
         return {
 
             ZhiZhunFa:[
@@ -233,7 +233,7 @@ export default ({
             sendMsg+=encodeURI(JSON.stringify(this.L2))
             sendMsg+=encodeURI(JSON.stringify(this.wuXiangGongSiFa))
 
-            axios.post("http://localhost:80/submitFocalDistance",sendMsg)
+            axios.post("http://124.71.157.88:80/submitFocalDistance",sendMsg)
         },
         getTimeKey(){
             return new Date().getTime()
@@ -484,8 +484,8 @@ div label{
     width: 200px;
     font-size: 20px;
 }
-div .table{
-    width: 60%;
+div table{
+    width: 800px;
 }
 
 div input{
@@ -536,6 +536,16 @@ li  {
     padding-top: 25px;
     padding-left: 540px;
     text-align: left;
+}
+button{
+  font-size: 22px;
+}
+input{
+    background: rgb(237, 240, 239);
+}
+div td{
+    border: 1px solid;
+    height: 30px;
 }
 </style>
 

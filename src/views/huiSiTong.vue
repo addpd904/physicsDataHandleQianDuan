@@ -21,12 +21,12 @@
                         </td>
                       </tr>
                       <tr>
-                        <td>
+                        <!-- <td>
                             标称值Rx(Ω)
                         </td>
                         <td>
                             Rx（实测值）（Ω）
-                        </td>
+                        </td> -->
                         <td>
                             R0（Ω）
                         </td>
@@ -77,27 +77,20 @@
             <div >
                 <h4>箱式电桥测电阻</h4>
                 <table class="center">
-                    <thead>
-                      <tr>
-                        <td colspan="4">
-                            电桥型号：
-                            <input>
-                        </td>
-                      </tr>
-                </thead>
+               
                     <!-- body -->
                
-                <tr v-for="i in 3" v-bind:key="i+timeKey">
+                <tr v-for="i in 2" v-bind:key="i+timeKey">
                         
-                        <td>{{ xsdqdata[i-1].title }}</td>
+                        <td>{{ xsdqdata[i].title }}</td>
                         <td >
-                            <input v-model="xsdqdata[i-1].val1">
+                            <input v-model="xsdqdata[i].val1">
                         </td>
                         <td >
-                            <input v-model="xsdqdata[i-1].val2">
+                            <input v-model="xsdqdata[i].val2">
                         </td>
                         <td >
-                            <input v-model="xsdqdata[i-1].val3">
+                            <input v-model="xsdqdata[i].val3">
                         </td>
                 </tr>
                 <tr>
@@ -152,10 +145,19 @@
                             Rx（标称值）(Ω)
                         </td>
                         <td>
-                            Rx（实测值）（Ω）
+                            N
                         </td>
                         <td>
-                            △n（格）
+                            R0
+                        </td>
+                        <td>
+                            △n
+                        </td>
+                        <td>
+                            △R'0（左） （Ω）
+                        </td>
+                        <td>
+                            △R''0（右）（Ω）
                         </td>
                         <td>
                             △R'x（左） （Ω）
@@ -171,7 +173,7 @@
                         </td>
                         </tr>
                     </thead>
-                    <tr v-for="(items,i) in lmddata" :key="i+timeKey">
+                    <!-- <tr v-for="(items,i) in lmddata" :key="i+timeKey">
                         <td v-if="i==2">510</td>
                         <td v-else>{{ 5.1*Math.pow(10,i)}}</td>
                         <td class="Rxscz"><input v-model="items[0].val"></td>
@@ -179,6 +181,22 @@
                         <td v-for="j of 2" v-bind:key="j+timeKey">
                         <input  type="text" v-model="items[j].val">
                         </td>
+                        <td class="delta_Rx_bar"></td>
+                        <td class="S"></td>
+
+                    </tr> -->
+                    <tr v-for="(items,i) in lmddata" :key="i+timeKey">
+                        <td v-if="i==2">510</td>
+                        <td v-else>{{ 5.1*Math.pow(10,i)}}</td>
+
+                        <td class="N"><input v-model="items[0].val"></td>
+                        <td class="R0"><input v-model="items[1].val"></td>
+                        <td>5</td>
+                        <td v-for="j of 2" v-bind:key="j+timeKey" >
+                        <input  type="text" v-model="items[j+1].val">
+                        </td>
+                        <td class="delta_Rx_zuo"></td>
+                        <td class="delta_Rx_you"></td>
                         <td class="delta_Rx_bar"></td>
                         <td class="S"></td>
 
@@ -216,22 +234,27 @@ export default {
             // 准确度等级f
             f:1,
             zzdqdata:[
-            [new Data("bcz",51),new Data("scz",0),new Data("R0",54),new Data("R0pie",52)],
-            [new Data("bcz",510),new Data("scz",0),new Data("R0",516),new Data("R0pie",513)],
-            [new Data("bcz",5100),new Data("scz",0),new Data("R0",5144),new Data("R0pie",5130)]
+            [new Data("R0",1),new Data("R0pie",2)],
+            [new Data("R0",1),new Data("R0pie",2)],
+            [new Data("R0",1),new Data("R0pie",2)]
         ],
         xsdqdata:[{'biaochenzhi':'bcz',val1:0,val2:0,val3:0,'title':'电阻标称值'},
         {'id':'bilibi',val1:0.01,val2:0.1,val3:1,'title':'比例臂N'},
-        {'id':'R0',val1:3293,val2:32.55,val3:3242,'title':'R0（Ω）'},
-        {'id':'zhunquedu',val1:0.1,val2:0.1,val3:0.1,'title':'准确度等级'}
+        {'id':'R0',val1:30,val2:30,val3:30,'title':'R0（Ω）'},
+        {'id':'zhunquedu',val1:0.2,val2:0.1,val3:0.1,'title':'准确度等级'}
         ],
         lmddata:[
-            [new Data("Rxscz",0),new Data("deltaRxzuo",10),new Data("deltaRxyou",0)],
-            [new Data("Rxscz",0),new Data("deltaRxzuo",0),new Data("deltaRxyou",0)],
-            [new Data("Rxscz",0),new Data("deltaRxzuo",0),new Data("deltaRxyou",0)],
-            [new Data("Rxscz",0),new Data("deltaRxzuo",0),new Data("deltaRxyou",0)],
-            [new Data("Rxscz",0),new Data("deltaRxzuo",0),new Data("deltaRxyou",0)],
+            [new Data("N",0.001),new Data("R0",5),new Data("R0zuo",1),new Data("R0you",0)],
+            [new Data("N",0.01),new Data("R0",5),new Data("R0zuo",1),new Data("R0you",0)],
+            [new Data("N",0.1),new Data("R0",5),new Data("R0zuo",1),new Data("R0you",0)],
+            [new Data("N",1),new Data("R0",2),new Data("R0zuo",1),new Data("R0you",0)],
+            [new Data("N",10),new Data("R0",2),new Data("R0zuo",1),new Data("R0you",0)],
            
+            // [new Data("N",0.001),new Data("R0",5194),new Data("R0zuo",5198),new Data("R0you",5186)],
+            // [new Data("N",0.01),new Data("R0",5206),new Data("R0zuo",5216),new Data("R0you",5198)],
+            // [new Data("N",0.1),new Data("R0",5104),new Data("R0zuo",5113),new Data("R0you",5100)],
+            // [new Data("N",1),new Data("R0",5102),new Data("R0zuo",5108),new Data("R0you",5080)],
+            // [new Data("N",10),new Data("R0",5108),new Data("R0zuo",5130),new Data("R0you",5092)],
            
         ],
         timeKey:new Date().getTime()
@@ -244,7 +267,7 @@ export default {
             sendMsg+=encodeURI(JSON.stringify(this.zzdqdata))
             sendMsg+=encodeURI(JSON.stringify(this.xsdqdata))
             sendMsg+=encodeURI(JSON.stringify(this.lmddata))
-            axios.post("http://localhost:80/submitHuiSiTong",sendMsg)
+            axios.post("http://124.71.157.88:80/submitHuiSiTong",sendMsg)
         },
         init(){
             let zzdq_btn_cal=document.querySelector('.zzdq .zzdq_btn_cal')
@@ -260,7 +283,7 @@ export default {
             let delta_Rxs=[]
             let i=0
             this.zzdqdata.forEach(element => {
-                Rxs[i]=Math.sqrt(element[2].val*element[3].val)
+                Rxs[i]=Math.sqrt(element[0].val*element[1].val)
                 i++
             })
             i=0
@@ -328,19 +351,43 @@ export default {
         },
         lmd_btn_cal(){
             flage3=1
+            let delta_Rx_yous=[]
+            let delta_Rx_zuos=[]
             let delta_Rx_bars=[]
             let Ss=[]
+            
             let i=0
             this.lmddata.forEach(ele=>{
-                delta_Rx_bars[i]=(ele[1].val*1+ele[2].val*1)/2
+                delta_Rx_zuos[i]=ele[0].val*1*Math.abs(ele[2].val*1-ele[1].val*1)
                 i++
             })
             i=0
+            this.lmddata.forEach(ele=>{
+                delta_Rx_yous[i]=ele[0].val*1*Math.abs(ele[3].val*1-ele[1].val*1)
+                i++
+            })
+            for(let i=0;i<delta_Rx_yous.length;i++){
+                delta_Rx_bars[i]=(delta_Rx_yous[i]+delta_Rx_zuos[i])/2
+            }
+        
+            i=0
             delta_Rx_bars.forEach(ele=>{
-                Ss[i]=5/(ele/this.lmddata[i][0].val)
+                Ss[i]=5*this.lmddata[i][0].val*this.lmddata[i][1].val/ele
                 i++  
             })
             // show these result in table
+            let tbs_lmd_delta_Rx_zuo=document.querySelectorAll('.lmd .delta_Rx_zuo')
+            i=0
+            tbs_lmd_delta_Rx_zuo.forEach(ele=>{
+                ele.innerHTML=delta_Rx_zuos[i].toFixed(3)
+                i++
+            })
+            let tbs_lmd_delta_Rx_you=document.querySelectorAll('.lmd .delta_Rx_you')
+            i=0
+            tbs_lmd_delta_Rx_you.forEach(ele=>{
+                ele.innerHTML=delta_Rx_yous[i].toFixed(3)
+                i++
+            })
             let tbs_lmd_delta_Rx_bar=document.querySelectorAll('.lmd .delta_Rx_bar')
             i=0
             tbs_lmd_delta_Rx_bar.forEach(ele=>{
@@ -374,19 +421,25 @@ export default {
 div table{
     text-align: center;
     border-collapse: collapse;
-    width: 60%;
+    width: 800px;
 } 
 div td{
     border: 1px solid;
     height: 30px;
 }
 .zzdq td,.lmd td{
-    width: 14%;
+    width: 10%;
 }
 .center{
     margin: auto;
 }
 input{
     width: 50px;
+}
+button{
+  font-size: 22px;
+}
+input{
+    background: rgb(237, 240, 239);
 }
 </style>
