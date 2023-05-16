@@ -2,7 +2,7 @@ const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
   // -----add for running in tomcat
-  publicPath: '././',
+  // publicPath: '././',
 
   // -----add for running in tomcat
 

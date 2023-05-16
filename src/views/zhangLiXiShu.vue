@@ -177,13 +177,19 @@
         </div>
 
     </div>
-    
+    <br>
+    <br>
+    <br>
+    <br>
     </div>
 </template>
   
 <script lang="ts">
 import axios from 'axios'
 //add func for calculate_K_R button
+let flage1=0
+let flage2=0
+let flage3=0
 let btn_K_R=document.querySelector('.calculate_K_R')
 let x=[1,1,1,1,1];
 let y=[1,1,1,1,1];
@@ -264,12 +270,14 @@ export default ({
 
         }
     },
+    // javascript 
     methods:{
         submitData(){
             let sendMsg=encodeURI(JSON.stringify(vueAddress.water))
-            console.log(JSON.stringify(vueAddress.water))
-            axios.post("http://5badc89c.r2.cpolar.top/submitZhangLiXiShu",sendMsg)
-            console.log(sendMsg)
+            sendMsg+=encodeURI(JSON.stringify(vueAddress.alcohol))
+            sendMsg+=encodeURI(JSON.stringify(vueAddress.D1D2))
+            sendMsg+=encodeURI(JSON.stringify(vueAddress.arr1))
+            axios.post("http://localhost:80/submitZhangLiXiShu",sendMsg)
         },
         cal(){
 
@@ -285,6 +293,7 @@ export default ({
             // let arr=this.arr1;
             btn_K_R=document.querySelector('.calculate_K_R')
             let cal_K_R=function (){
+                flage1=1
                 for (let i=0;i<vueAddress.arr1[0].length;i++){
                 x[i]=g*parseFloat(vueAddress.arr1[0][i].val);
                 }
@@ -328,7 +337,11 @@ export default ({
                     option.series[0].data[i][1]=y[i]
                     
                 }
+                if(flage1==1&&flage2==1&&flage3==1){
+                    vueAddress.submitData()
+                }
                 vueAddress.$refs.diyLine.chart.setOption(option)
+
             }
 
             btn_K_R.addEventListener('click',cal_K_R)
@@ -338,6 +351,7 @@ export default ({
             rows=document.querySelectorAll('.water div table tr')
            
             let cal=function (){
+                flage2=1
                 D1=parseFloat(vueAddress.D1D2[0].val)
                 D2=parseFloat(vueAddress.D1D2[1].val)
                 let sum=0
@@ -363,6 +377,9 @@ export default ({
                 let mean_a=sum/(vueAddress.water.length);
                 let result=document.querySelector('.water .a')
                 result.innerHTML='a='+mean_a.toFixed(6)
+                if(flage1==1&&flage2==1&&flage3==1){
+                    vueAddress.submitData()
+                }
             }
             btn.addEventListener('click',cal)
 
@@ -371,6 +388,7 @@ export default ({
             rows_jiu=document.querySelectorAll('.JiuJin div table tr')
 
             let cal_jiu=function (){
+                flage3=1
                 D1=parseFloat(vueAddress.D1D2[0].val)
                 D2=parseFloat(vueAddress.D1D2[1].val)
                 let sum=0
@@ -396,7 +414,9 @@ export default ({
                 let mean_a=sum/(vueAddress.alcohol.length);
                 let result=document.querySelector('.JiuJin .a')
                 result.innerHTML='a='+mean_a.toFixed(6)
-                vueAddress.submitData()
+                if(flage1==1&&flage2==1&&flage3==1){
+                    vueAddress.submitData()
+                }
             }
             btn_jiu.addEventListener('click',cal_jiu)
         }

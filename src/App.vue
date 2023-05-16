@@ -2,11 +2,18 @@
   <div id="app">
     <nav>
       <div class="joinus">
-      <el-tag type="warning">余下实验处理仍在开发中，如果你也对网页开发感兴趣，加入我们，一起开发~会简单的java语法就行</el-tag>
+      <el-tag type="success">余下实验处理仍在开发中，如果你也对网页开发感兴趣，加入我们，一起开发~</el-tag>
+      <br/>
+      <br/>
+      <el-tag type="warning" class="warn" >声明：计算结果仅供参考，不建议用于实验报告的填写哦~<br>如计算有误，请联系QQ2056098523修改</el-tag>
+
+
       </div>
       <router-link to="/">液体表面张力系数</router-link> |
-      <router-link to="/focalDistance">焦距测量</router-link> |
-      
+      <router-link to="/focalDistance">薄透镜焦距的测量</router-link> |
+      <router-link to="/huiSiTong">惠斯通电桥测电阻</router-link> |
+      <router-link to="/shengShuCeLiang">声速的测量</router-link> |
+
     </nav>
     <router-view/>
   </div>
@@ -35,4 +42,9 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+#app .warn{
+    font-size: 17px;
+}
+
 </style>
+<!-- js html css vue element  -->
